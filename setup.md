@@ -6,11 +6,12 @@ Now that you have installed the sandbox, you'll need to install:
 
 ## TLS certificates
 If you have your own certificates that are trusted by your browser,
-simply edit the nats.conf and http.conf files.
+simply edit the nats.conf to point to your certificates. If you want to use
+the provided https test server, you'll also want to modify `bin/server.js`.
 
-Otherwise you'll need to generate TLS certificates that you can use 
-that are trusted by your local environment. There are multiple ways 
-you can generate certificates. One way is to use `mkcert`.
+Otherwise you'll need to generate TLS certificates that are trusted by 
+your local environment. There are multiple ways you can generate certificates. 
+One way is to use `mkcert`.
 
 Install `mkcert` from [https://github.com/FiloSottile/mkcert](https://github.com/FiloSottile/mkcert).
 Once installed, type `npm run install-certs`. This will create

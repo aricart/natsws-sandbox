@@ -9,8 +9,19 @@ const opts = {
   cert: fs.readFileSync(path.join('../certs/cert.pem'))
 }
 
+const mimeTypes = {
+  ".html": "text/html",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".json": "application/json",
+  ".js": "text/javascript",
+  ".mjs": "text/javascript",
+  ".css": "text/css"
+}
+
 const CONTENT_ROOT = path.join(__dirname, '../content')
-const LIB = path.join(__dirname, 'node_modules/nats.ws/nats.js')
 https.createServer(opts, (req, res) => {
   if (req.url === '/') {
     req.url = '/index.html'
@@ -29,7 +40,12 @@ https.createServer(opts, (req, res) => {
       console.warn(`error reading ${t}: ${err.toString()}`)
       res.end()
     } else {
-      res.writeHead(200)
+      let type = mimeTypes[path.extname(t)]
+      if(type) {
+        res.writeHead(200, {"Content-Type": type})
+      } else {
+        res.writeHead(200)
+      }
       res.end(data)
     }
   })

@@ -5,14 +5,14 @@
   "main": "index.html",
   "scripts": {
     "preinstall": "cat setup.md",
-    "postinstall": "mkdir -p ./content && cp node_modules/nats.ws/nats.js* content/",
+    "postinstall": "mkdir -p ./content && cp node_modules/nats.ws/nats.mjs content/",
     "install-certs": "env CAROOT=./certs mkcert -cert-file ./certs/cert.pem -key-file ./certs/key.pem -install localhost 127.0.0.1 ::1",
     "uninstall-certs": "env CAROOT=./certs mkcert -uninstall && echo 'demo cert uninstalled, delete ./certs manually'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-ns": "cd node_modules && git clone --branch=master https://github.com/nats-io/nats-server.git && cd nats-server && go build && mv nats-server ../../",
     "start-nats": "./nats-server -DV -c nats.conf",
     "start-http": "cd ./bin && node server.js",
-    "clean": "rm ./certs/*.pem ./content/nats.js ./content/nats.js.map ./nats-server && rm -R ./node_modules"
+    "clean": "rm ./certs/*.pem ./content/nats.mjs ./nats-server && rm -R ./node_modules"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,6 @@
   "author": "NATS Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "nats.ws": "next"
+    "nats.ws": "beta"
   }
 }
